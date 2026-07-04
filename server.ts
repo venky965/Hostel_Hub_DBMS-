@@ -104,8 +104,6 @@ async function seedDatabase() {
 }
 
 async function startServer() {
-  await seedDatabase();
-  
   const app = express();
   const PORT = 3000;
 
@@ -468,6 +466,10 @@ async function startServer() {
 
   app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on http://localhost:${PORT}`);
+    // Seed database asynchronously in the background so boot is fast
+    seedDatabase()
+      .then(() => console.log("Database seeded successfully if needed"))
+      .catch((err) => console.error("Database seeding failed:", err));
   });
 }
 

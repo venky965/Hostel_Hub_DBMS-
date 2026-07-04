@@ -74,12 +74,12 @@ export default function Dashboard({ stats, payments, rooms, complaints }: Dashbo
                   strokeWidth="10"
                   fill="transparent"
                   strokeDasharray={402}
-                  strokeDashoffset={402 - (402 * (stats.occupiedRooms / stats.totalRooms))}
+                  strokeDashoffset={402 - (402 * (stats.totalRooms > 0 ? stats.occupiedRooms / stats.totalRooms : 0))}
                   className="text-accent transition-all duration-1000"
                 />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-2xl font-bold">{Math.round((stats.occupiedRooms / stats.totalRooms) * 100)}%</span>
+                <span className="text-2xl font-bold">{Math.round((stats.totalRooms > 0 ? stats.occupiedRooms / stats.totalRooms : 0) * 100)}%</span>
                 <span className="text-[10px] text-text-secondary uppercase">Full</span>
               </div>
             </div>
